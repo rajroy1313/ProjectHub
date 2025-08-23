@@ -23,9 +23,9 @@ export default function Footer() {
           {/* Logo and Copyright */}
           <div className="mb-6 md:mb-0">
             <div className="text-xl font-bold text-blue-400 mb-2">
-              <span className="font-mono">&lt;</span>AlexChen<span className="font-mono">/&gt;</span>
+              <span className="font-mono">&lt;</span>ProjectHub<span className="font-mono">/&gt;</span>
             </div>
-            <p className="text-slate-400 text-sm">© 2024 Alex Chen. All rights reserved.</p>
+            <p className="text-slate-400 text-sm">© 2024 ProjectHub. All rights reserved.</p>
           </div>
 
           {/* Social Links */}
@@ -56,6 +56,6 @@ export default function Footer() {
           </button>
         </div>
       </div>
-    </footer>
+    </header>
   );
 }
