@@ -1,4 +1,5 @@
-import { Github, Linkedin, Twitter, Mail, ChevronUp } from "lucide-react";
+import { Github, Twitter, Facebook, ChevronUp } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 
 export default function Footer() {
   const handleScrollToTop = () => {
@@ -17,9 +18,9 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: <Github />, href: "#", name: "github" },
-    { icon: <Linkedin />, href: "#", name: "linkedin" },
+    { icon: <FaDiscord />, href: "#", name: "discord" },
     { icon: <Twitter />, href: "#", name: "twitter" },
-    { icon: <Mail />, href: "#", name: "email" }
+    { icon: <Facebook />, href: "#", name: "facebook" }
   ];
 
   const navigationLinks = [
