@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Github, Twitter, Facebook, ChevronDown } from "lucide-react";
+import { Github, Twitter, Facebook, ChevronDown, Linkedin, MessageCircle } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 
 export default function HeroSection() {
