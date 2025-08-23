@@ -56,6 +56,6 @@ export default function Footer() {
           </button>
         </div>
       </div>
-    </header>
+    </footer>
   );
 }
