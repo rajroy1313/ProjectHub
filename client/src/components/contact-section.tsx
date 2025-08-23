@@ -46,13 +46,13 @@ export default function ContactSection() {
     {
       icon: <Phone className="text-emerald-400" />,
       label: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "+8801934843920",
       color: "bg-emerald-500/20"
     },
     {
       icon: <MapPin className="text-violet-400" />,
       label: "Location",
-      value: "San Francisco, CA",
+      value: "Barishal, Banglades",
       color: "bg-violet-500/20"
     }
   ];
@@ -60,7 +60,7 @@ export default function ContactSection() {
   const availability = [
     { label: "Status", value: "Available", color: "bg-emerald-500/20 text-emerald-400" },
     { label: "Response Time", value: "Within 24 hours", color: "text-slate-400" },
-    { label: "Timezone", value: "PST (UTC-8)", color: "text-slate-400" }
+    { label: "Timezone", value: "BST (GMT+6)", color: "text-slate-400" }
   ];
 
   return (

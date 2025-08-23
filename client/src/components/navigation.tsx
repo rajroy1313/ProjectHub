@@ -36,7 +36,7 @@ export default function Navigation() {
             className="text-xl font-bold text-blue-400"
             data-testid="nav-logo"
           >
-            <span className="font-mono">&lt;</span>AlexChen<span className="font-mono">/&gt;</span>
+            <span className="font-mono">&lt;</span>ProjectHub<span className="font-mono">/&gt;</span>
           </button>
 
           {/* Desktop Navigation */}
