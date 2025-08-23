@@ -69,13 +69,13 @@ export default function HeroSection() {
 
         <h1 className="text-5xl md:text-7xl font-bold mb-6">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-500">
-            Alex Chen
+            ProjectHub
           </span>
         </h1>
         
         <p className="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
           Full Stack Developer specializing in{" "}
-          <span className="text-blue-400 font-medium">React Applications</span>, 
+          <span className="text-blue-400 font-medium">Web Applications,</span>, 
           <span className="text-violet-400 font-medium"> Automation Bots</span>, and{" "}
           <span className="text-emerald-400 font-medium">Developer Utilities</span>
         </p>
