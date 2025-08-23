@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Github, MessageCircle, Twitter, Facebook, ChevronDown } from "lucide-react";
+import { Github, Twitter, Facebook, ChevronDown } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 
 export default function HeroSection() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -116,7 +117,7 @@ export default function HeroSection() {
             <Github />
           </a>
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-discord">
-            <MessageCircle />
+            <FaDiscord />
           </a>
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-twitter">
             <Twitter />
