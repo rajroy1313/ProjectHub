@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Twitter, Mail, ChevronDown } from "lucide-react";
+import { Github, MessageCircle, Twitter, Facebook, ChevronDown } from "lucide-react";
 
 export default function HeroSection() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
@@ -115,14 +115,14 @@ export default function HeroSection() {
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-github">
             <Github />
           </a>
-          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-linkedin">
-            <Linkedin />
+          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-discord">
+            <MessageCircle />
           </a>
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-twitter">
             <Twitter />
           </a>
-          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-email">
-            <Mail />
+          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-facebook">
+            <Facebook />
           </a>
         </div>
       </div>
