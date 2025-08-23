@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Github, Twitter, Facebook, ChevronDown, Linkedin, MessageCircle } from "lucide-react";
+import { Github, Twitter, Linkedin, ChevronDown } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 
 export default function HeroSection() {
@@ -116,14 +116,14 @@ export default function HeroSection() {
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-github">
             <Github />
           </a>
-          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-discord">
-            <FaDiscord />
+          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-linkedin">
+            <Linkedin />
           </a>
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-twitter">
             <Twitter />
           </a>
-          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-facebook">
-            <Facebook />
+          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-discord">
+            <FaDiscord />
           </a>
         </div>
       </div>
