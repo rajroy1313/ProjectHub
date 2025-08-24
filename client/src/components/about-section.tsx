@@ -65,7 +65,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* About Image 
+          {/* About Image */}
           <div className="relative">
             <div className="relative z-10">
               <img 
