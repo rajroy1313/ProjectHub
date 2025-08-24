@@ -1,7 +1,5 @@
 {
-  "buildCommand": "npm run build:frontend || vite build",
+  "buildCommand": "vite build",
   "outputDirectory": "dist/public",
-  "installCommand": "npm install",
-  "framework": null,
-  "functions": {}
+  "installCommand": "npm install"
 }
