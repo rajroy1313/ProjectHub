@@ -66,8 +66,8 @@ export default function AboutSection() {
           </div>
 
           {/* About Image */}
-          {/* <div className="relative">
-            <div className="relative z-10">
+           <div className="relative">
+             {*/<div className="relative z-10">
               <img 
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=600"
                 alt="Alex Chen - Developer Portrait"
