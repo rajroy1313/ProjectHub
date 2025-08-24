@@ -66,7 +66,7 @@ export default function AboutSection() {
           </div>
 
           {/* About Image */}
-          <div className="relative">
+          {/* <div className="relative">
             <div className="relative z-10">
               <img 
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=600"
@@ -75,6 +75,7 @@ export default function AboutSection() {
                 data-testid="about-image"
               />
             </div>
+            */}
             
             {/* Decorative Elements */}
             <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/20 rounded-full blur-xl"></div>
