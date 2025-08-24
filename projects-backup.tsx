@@ -16,7 +16,68 @@ interface Project {
   statusColor: string;
 }
 
-const projects: Project[] = [];
+const projects: Project[] = [
+  {
+    id: "ecommerce",
+    title: "E-Commerce Platform",
+    description: "Full-featured e-commerce platform built with React, featuring user authentication, payment processing, and admin dashboard.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    category: "websites",
+    tech: ["React", "Node.js", "MongoDB", "Stripe"],
+    status: "Live",
+    statusColor: "bg-emerald-500"
+  },
+  {
+    id: "discord-bot",
+    title: "Discord Moderation Bot",
+    description: "Advanced Discord bot with moderation tools, custom commands, music player, and server analytics dashboard.",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    category: "bots",
+    tech: ["Discord.js", "Node.js", "Redis", "PostgreSQL"],
+    status: "Active",
+    statusColor: "bg-violet-500"
+  },
+  {
+    id: "snippet-manager",
+    title: "Code Snippet Manager",
+    description: "Desktop application for organizing and managing code snippets with syntax highlighting and quick search functionality.",
+    image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    category: "utilities",
+    tech: ["Electron", "JavaScript", "SQLite", "Prism.js"],
+    status: "Open Source",
+    statusColor: "bg-emerald-500"
+  },
+  {
+    id: "task-manager",
+    title: "Task Management App",
+    description: "Collaborative task management platform with real-time updates, team collaboration, and project tracking features.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    category: "websites",
+    tech: ["React", "Socket.io", "Express", "MongoDB"],
+    status: "Featured",
+    statusColor: "bg-blue-500"
+  },
+  {
+    id: "ai-trading-bot",
+    title: "AI Trading Bot",
+    description: "Intelligent cryptocurrency trading bot using machine learning algorithms for market analysis and automated trading.",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    category: "bots",
+    tech: ["Python", "TensorFlow", "Redis", "Binance API"],
+    status: "AI Powered",
+    statusColor: "bg-violet-500"
+  },
+  {
+    id: "cli-tool",
+    title: "Project Scaffolding CLI",
+    description: "Command-line tool for rapidly scaffolding new projects with custom templates and configuration presets.",
+    image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300",
+    category: "utilities",
+    tech: ["Node.js", "Commander.js", "Inquirer", "Chalk"],
+    status: "CLI Tool",
+    statusColor: "bg-emerald-500"
+  }
+];
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<string>("all");

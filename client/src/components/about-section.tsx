@@ -12,7 +12,7 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-20 bg-slate-800/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-4xl mx-auto">
           
           {/* About Content */}
           <div>
@@ -65,22 +65,6 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* About Image */}
-          <div className="relative">
-            <div className="relative z-10">
-              <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=600"
-                alt="Alex Chen - Developer Portrait"
-                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-                data-testid="about-image"
-              />
-            </div>
-            
-            {/* Decorative Elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/20 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-violet-500/20 rounded-full blur-xl"></div>
-            <div className="absolute top-1/2 -right-8 w-16 h-16 bg-emerald-500/20 rounded-full blur-lg"></div>
-          </div>
 
         </div>
       </div>
