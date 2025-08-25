@@ -43,6 +43,7 @@ export default function Navigation() {
           <div className="hidden md:flex space-x-8">
             <NavLink href="home">Home</NavLink>
             <NavLink href="projects">Projects</NavLink>
+            <NavLink href="request-project">Request Project</NavLink>
             <NavLink href="skills">Skills</NavLink>
             <NavLink href="about">About</NavLink>
             <NavLink href="contact">Contact</NavLink>
@@ -80,6 +81,7 @@ export default function Navigation() {
                 <div className="flex flex-col space-y-6 mt-8">
                   <NavLink href="home">Home</NavLink>
                   <NavLink href="projects">Projects</NavLink>
+                  <NavLink href="request-project">Request Project</NavLink>
                   <NavLink href="skills">Skills</NavLink>
                   <NavLink href="about">About</NavLink>
                   <NavLink href="contact">Contact</NavLink>
