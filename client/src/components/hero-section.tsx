@@ -120,7 +120,7 @@ export default function HeroSection() {
 
         {/* Social Links */}
         <div className="flex justify-center space-x-6">
-          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-github">
+          <a href="https://github.com/rajroy1313/" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-github">
             <Github />
           </a>
           <a href="https://discord.gg/gd7UNSfX86" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-discord">
