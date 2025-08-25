@@ -102,6 +102,13 @@ export default function HeroSection() {
             View My Work
           </Button>
           <Button
+            onClick={() => handleScroll("request-project")}
+            className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:-translate-y-1"
+            data-testid="button-request-project"
+          >
+            Request Your Project
+          </Button>
+          <Button
             variant="outline"
             onClick={() => handleScroll("contact")}
             className="border-2 border-slate-600 text-slate-300 px-8 py-4 rounded-xl font-medium hover:border-blue-500 hover:text-blue-400 transition-all duration-300 hover:-translate-y-1 bg-transparent"
