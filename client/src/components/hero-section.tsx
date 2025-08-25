@@ -61,7 +61,7 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="mb-8">
           <img 
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=200" 
+            src="https://www.canva.com/design/DAGnarD9O2E/zTUWmSQ-6aVcwD_yN8ziqQ/edit" 
             alt="Developer Profile" 
             className="w-48 h-48 rounded-full mx-auto border-4 border-blue-500/50 shadow-2xl object-cover hover:border-blue-400 transition-all duration-300 hover:scale-105"
             data-testid="profile-image"
