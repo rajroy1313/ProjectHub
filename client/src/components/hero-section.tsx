@@ -116,7 +116,7 @@ export default function HeroSection() {
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-github">
             <Github />
           </a>
-          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-discord">
+          <a href="https://discord.gg/gd7UNSfX86" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-discord">
             <FaDiscord />
           </a>
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-twitter">
