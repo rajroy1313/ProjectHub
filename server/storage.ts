@@ -1,38 +1,100 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import {
+  users,
+  projectRequests,
+  type User,
+  type UpsertUser,
+  type InsertProjectRequest,
+  type ProjectRequest,
+} from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
+  // User operations
   getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  getUserBySocialId(provider: string, socialId: string): Promise<User | undefined>;
+  upsertUser(user: UpsertUser): Promise<User>;
+  
+  // Project request operations
+  createProjectRequest(request: InsertProjectRequest): Promise<ProjectRequest>;
+  getProjectRequests(userId: string): Promise<ProjectRequest[]>;
+  getAllProjectRequests(): Promise<ProjectRequest[]>;
+  updateProjectRequestStatus(id: string, status: string): Promise<ProjectRequest>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
+  // User operations
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
     return user;
   }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
+  }
+
+  async getUserBySocialId(provider: string, socialId: string): Promise<User | undefined> {
+    let whereCondition;
+    switch (provider) {
+      case 'google':
+        whereCondition = eq(users.googleId, socialId);
+        break;
+      case 'discord':
+        whereCondition = eq(users.discordId, socialId);
+        break;
+      case 'facebook':
+        whereCondition = eq(users.facebookId, socialId);
+        break;
+      default:
+        return undefined;
+    }
+    
+    const [user] = await db.select().from(users).where(whereCondition);
+    return user;
+  }
+
+  async upsertUser(userData: UpsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.id,
+        set: {
+          ...userData,
+          updatedAt: new Date(),
+        },
+      })
+      .returning();
+    return user;
+  }
+
+  // Project request operations
+  async createProjectRequest(requestData: InsertProjectRequest): Promise<ProjectRequest> {
+    const [request] = await db
+      .insert(projectRequests)
+      .values(requestData)
+      .returning();
+    return request;
+  }
+
+  async getProjectRequests(userId: string): Promise<ProjectRequest[]> {
+    return db.select().from(projectRequests).where(eq(projectRequests.userId, userId));
+  }
+
+  async getAllProjectRequests(): Promise<ProjectRequest[]> {
+    return db.select().from(projectRequests);
+  }
+
+  async updateProjectRequestStatus(id: string, status: string): Promise<ProjectRequest> {
+    const [request] = await db
+      .update(projectRequests)
+      .set({ status, updatedAt: new Date() })
+      .where(eq(projectRequests.id, id))
+      .returning();
+    return request;
+  }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

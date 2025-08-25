@@ -102,7 +102,7 @@ export default function HeroSection() {
             View My Work
           </Button>
           <Button
-            onClick={() => handleScroll("request-project")}
+            onClick={() => window.location.href = "/login"}
             className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:-translate-y-1"
             data-testid="button-request-project"
           >
