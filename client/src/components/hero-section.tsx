@@ -122,7 +122,7 @@ export default function HeroSection() {
           <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-twitter">
             <Twitter />
           </a>
-          <a href="#" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-facebook">
+          <a href="https://www.facebook.com/profile.php?id=61579954435511" className="text-slate-400 hover:text-blue-400 transition-colors duration-200 text-2xl" data-testid="social-facebook">
             <Facebook />
           </a>
         </div>
