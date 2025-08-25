@@ -1,5 +1,6 @@
 
 {
+  "author":" projecthub"
   "buildCommand": "git config --global user.name 'ProjectHub Developer' && git config --global user.email 'developer@projecthub.dev' && npm run build",
   "outputDirectory": "dist/public",
   "installCommand": "npm install",
