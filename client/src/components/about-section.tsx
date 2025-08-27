@@ -31,9 +31,9 @@ export default function AboutSection() {
               </p>
               
               <p>
-               • <strong>Collaborative projects </strong>that sharpen your skills and expand your portfolio.
-               • <strong>Practical resources </strong>focused on building, not just learning theory.
-               • <strong>A supportive community</strong> of coders who speak your language — no hand-holding, no gatekeeping.
+               • <strong>Collaborative projects </strong>that sharpen your skills and expand your portfolio.<br>
+               • <strong>Practical resources </strong>focused on building, not just learning theory.<br>
+               • <strong>A supportive community</strong> of coders who speak your language — no hand-holding, no gatekeeping.<br>
               </p>
               
               <p>
