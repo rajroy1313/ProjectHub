@@ -24,20 +24,21 @@ export default function AboutSection() {
             
             <div className="space-y-6 text-slate-300 leading-relaxed">
               <p className="text-lg">
-                Hello! I'm Alex, a passionate full-stack developer with over 5 years of experience 
-                building innovative web applications, automation tools, and custom software solutions.
+                Hello all, welcome to ProjectHub. ProjectHub is where developers go to turn ideas 
+                into real, working code. Designed for programmers with some experience under their
+                belt, ProjectHub bridges the gap between basic tutorials and advanced, enterprise-level
+                platforms. Here, you’ll find:
               </p>
               
               <p>
-                My journey started with a fascination for solving complex problems through code. 
-                I specialize in creating efficient, scalable applications using modern technologies 
-                like React, Node.js, and Python.
+               • <strong>Collaborative projects </strong>that sharpen your skills and expand your portfolio.
+               • <strong>Practical resources </strong>focused on building, not just learning theory.
+               • <strong>A supportive community</strong> of coders who speak your language — no hand-holding, no gatekeeping.
               </p>
               
               <p>
-                When I'm not coding, you'll find me exploring new technologies, contributing to 
-                open-source projects, or sharing knowledge with the developer community through 
-                blog posts and technical talks.
+                We’re always looking for fresh ideas and exciting builds. <strong>Got a project worth sharing?
+                Bring it to ProjectHub and build it with us.</strong>
               </p>
             </div>
 
