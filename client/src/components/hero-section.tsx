@@ -99,7 +99,7 @@ export default function HeroSection() {
             className="bg-gradient-to-r from-blue-500 to-violet-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1"
             data-testid="button-view-work"
           >
-            View My Work
+            View our Work
           </Button>
           <Button
             onClick={() => window.location.href = "/login"}
