@@ -16,7 +16,80 @@ interface Project {
   statusColor: string;
 }
 
-const projects: Project[] = [];
+const projects: Project[] = [
+  {
+    id: "portfolio-website",
+    title: "Personal Portfolio Website",
+    description: "A modern, responsive portfolio website built with React and TypeScript. Features smooth animations, dark/light mode toggle, and optimized performance.",
+    image: "/api/placeholder/400/300",
+    category: "websites",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    liveUrl: "https://yourportfolio.com",
+    githubUrl: "https://github.com/yourusername/portfolio",
+    status: "Live",
+    statusColor: "bg-green-500"
+  },
+  {
+    id: "ecommerce-platform",
+    title: "E-Commerce Platform",
+    description: "Full-stack e-commerce solution with user authentication, payment processing, inventory management, and admin dashboard.",
+    image: "/api/placeholder/400/300",
+    category: "websites",
+    tech: ["React", "Node.js", "PostgreSQL", "Stripe", "Express"],
+    liveUrl: "https://yourstore.com",
+    githubUrl: "https://github.com/yourusername/ecommerce",
+    status: "Live",
+    statusColor: "bg-green-500"
+  },
+  {
+    id: "task-management",
+    title: "Task Management App",
+    description: "Collaborative task management application with real-time updates, team collaboration features, and project tracking capabilities.",
+    image: "/api/placeholder/400/300",
+    category: "websites",
+    tech: ["React", "Socket.io", "MongoDB", "Express", "JWT"],
+    liveUrl: "https://yourtasks.com",
+    githubUrl: "https://github.com/yourusername/taskmanager",
+    status: "Live",
+    statusColor: "bg-green-500"
+  },
+  {
+    id: "weather-dashboard",
+    title: "Weather Dashboard",
+    description: "Interactive weather dashboard with location-based forecasts, historical data visualization, and severe weather alerts.",
+    image: "/api/placeholder/400/300",
+    category: "websites",
+    tech: ["React", "Chart.js", "OpenWeather API", "Geolocation"],
+    liveUrl: "https://yourweather.com",
+    githubUrl: "https://github.com/yourusername/weather-dashboard",
+    status: "Live",
+    statusColor: "bg-green-500"
+  },
+  {
+    id: "blog-platform",
+    title: "Blog Platform",
+    description: "Content management system with markdown support, SEO optimization, comment system, and analytics dashboard for bloggers.",
+    image: "/api/placeholder/400/300",
+    category: "websites",
+    tech: ["React", "Next.js", "Prisma", "PostgreSQL", "MDX"],
+    liveUrl: "https://yourblog.com",
+    githubUrl: "https://github.com/yourusername/blog-platform",
+    status: "Development",
+    statusColor: "bg-yellow-500"
+  },
+  {
+    id: "fitness-tracker",
+    title: "Fitness Tracking Website",
+    description: "Personal fitness tracking application with workout logging, progress visualization, and social features for motivation.",
+    image: "/api/placeholder/400/300",
+    category: "websites",
+    tech: ["React", "D3.js", "Firebase", "PWA", "Service Workers"],
+    liveUrl: "https://yourfitness.com",
+    githubUrl: "https://github.com/yourusername/fitness-tracker",
+    status: "Beta",
+    statusColor: "bg-blue-500"
+  }
+];
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
