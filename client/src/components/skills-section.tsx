@@ -20,8 +20,9 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: "React", level: 5 },
       { name: "TypeScript", level: 4 },
-      { name: "Next.js", level: 4 },
-      { name: "Tailwind CSS", level: 5 }
+      { name: "Discord.js", level: 4 },
+      { name: "Discord.py", level: 3 },
+      { name: "Tailwind CSS", level:4 }
     ]
   },
   {
@@ -30,7 +31,7 @@ const skillCategories: SkillCategory[] = [
     color: "text-emerald-400",
     skills: [
       { name: "Node.js", level: 5 },
-      { name: "Express.js", level: 4 },
+      { name: "mySQL", level: 4 },
       { name: "Python", level: 4 },
       { name: "MongoDB", level: 4 }
     ]
@@ -40,10 +41,10 @@ const skillCategories: SkillCategory[] = [
     icon: <Settings className="text-4xl" />,
     color: "text-violet-400",
     skills: [
-      { name: "Docker", level: 4 },
-      { name: "AWS", level: 3 },
+      
       { name: "Git", level: 5 },
-      { name: "Vercel", level: 4 }
+      { name: "Vercel", level: 4 },
+      { name: "Firebase", level: 5}
     ]
   },
   {
@@ -51,22 +52,23 @@ const skillCategories: SkillCategory[] = [
     icon: <Rocket className="text-4xl" />,
     color: "text-orange-400",
     skills: [
-      { name: "Bot Development", level: 5 },
-      { name: "Web Scraping", level: 4 },
-      { name: "API Development", level: 5 },
-      { name: "Automation", level: 4 }
+      { name: "Bot Development", level: 4 },
+      { name: "Web Development", level: 4 },
+      { name: "App Building", level: 3 }
+      
     ]
   }
 ];
 
+const techLogos = [
 const techLogos = [
   { name: "React", icon: "fab fa-react", color: "text-blue-400" },
   { name: "Node.js", icon: "fab fa-node-js", color: "text-emerald-400" },
   { name: "JavaScript", icon: "fab fa-js-square", color: "text-yellow-400" },
   { name: "Python", icon: "fab fa-python", color: "text-violet-400" },
   { name: "GitHub", icon: "fab fa-github", color: "text-slate-300" },
-  { name: "AWS", icon: "fab fa-aws", color: "text-orange-400" },
-  { name: "Docker", icon: "fab fa-docker", color: "text-blue-500" }
+  { name: "discord.js", icon: "fab fa-discord", color: "text-yellow-400" }, // yellow to match JS
+  { name: "discord.py", icon: "fab fa-discord", color: "text-blue-400" },   // blue to match Python
 ];
 
 export default function SkillsSection() {
