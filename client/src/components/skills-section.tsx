@@ -71,7 +71,7 @@ const techLogos = [
   { name: "discord.py", icon: "fab fa-discord", color: "text-blue-400" },   // blue to match Python
 ];
 
-export default function SkillsSection() {
+{/*export default function SkillsSection() {
   const renderSkillDots = (level: number) => {
     return (
       <div className="flex space-x-1">
@@ -86,7 +86,22 @@ export default function SkillsSection() {
       </div>
     );
   };
-
+*/}
+export default function SkillsSection() {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      {techLogos.map((t) => (
+        <div
+          key={t.name}
+          className="flex items-center gap-3 rounded-2xl border border-white/10 p-3"
+        >
+          <i className={`${t.icon} ${t.color} text-2xl`} aria-hidden="true" />
+          <span className="text-sm font-medium">{t.name}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
   return (
     <section id="skills" className="py-20 bg-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
