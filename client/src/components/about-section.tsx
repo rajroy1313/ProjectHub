@@ -24,22 +24,17 @@ export default function AboutSection() {
             
             <div className="space-y-6 text-slate-300 leading-relaxed">
               <p className="text-lg">
-                Hello all, welcome to ProjectHub. ProjectHub is where developers go to turn ideas 
-                into real, working code. Designed for programmers with some experience under their
-                belt, ProjectHub bridges the gap between basic tutorials and advanced, enterprise-level
-                platforms. Here, you’ll find:
-              </p>
-              
-              <p>
-               • <strong>Collaborative projects </strong>that sharpen your skills and expand your portfolio.</br>
-               • <strong>Practical resources </strong>focused on building, not just learning theory.</br>
-               • <strong>A supportive community</strong> of coders who speak your language — no hand-holding, no gatekeeping.</br>
-              </p>
-              
-              <p>
-                We’re always looking for fresh ideas and exciting builds. <strong>Got a project worth sharing?
-                Bring it to ProjectHub and build it with us.</strong>
-              </p>
+  ProjectHub is where developers go to turn ideas into real, working code. Designed for programmers 
+  with some experience under their belt, ProjectHub bridges the gap between basic tutorials and 
+  advanced, enterprise-level platforms.
+</p>
+
+<p><strong>Collaborative projects</strong> that sharpen your skills and expand your portfolio.</p>
+<p><strong>Practical resources</strong> focused on building, not just learning theory.</p>
+<p><strong>A supportive community</strong> of coders who speak your language — no hand-holding, no gatekeeping.</p>
+
+<p><strong>We’re always looking for fresh ideas and exciting builds.</strong> 
+<span style="color: #0073e6;">Got a project worth sharing? Bring it to ProjectHub and build it with us.</span></p>""
             </div>
 
             {/* Stats */}
