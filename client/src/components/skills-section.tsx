@@ -60,7 +60,7 @@ const skillCategories: SkillCategory[] = [
   }
 ];
 
-const techLogos = [
+
 const techLogos = [
   { name: "React", icon: "fab fa-react", color: "text-blue-400" },
   { name: "Node.js", icon: "fab fa-node-js", color: "text-emerald-400" },
@@ -68,7 +68,7 @@ const techLogos = [
   { name: "Python", icon: "fab fa-python", color: "text-violet-400" },
   { name: "GitHub", icon: "fab fa-github", color: "text-slate-300" },
   { name: "discord.js", icon: "fab fa-discord", color: "text-yellow-400" }, // yellow to match JS
-  { name: "discord.py", icon: "fab fa-discord", color: "text-blue-400" },   // blue to match Python
+  { name: "discord.py", icon: "fab fa-discord", color: "text-blue-400" }   // blue to match Python
 ];
 
 {/*export default function SkillsSection() {
