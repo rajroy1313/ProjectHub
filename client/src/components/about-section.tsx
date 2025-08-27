@@ -18,7 +18,7 @@ export default function AboutSection() {
           <div>
             <h2 className="text-4xl md:text-5xl font-bold mb-8">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-500">
-                About ous.
+                About us.
               </span>
             </h2>
             
