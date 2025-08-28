@@ -23,12 +23,12 @@ const projects: Project[] = [
     description: "PrimeBot is a sleek, multipurpose Discord bot built to supercharge your server with essential tools. It features a dynamic giveaway system with customizable entries, interactive polls for instant feedback, and a ticket system for seamless support handling. With fun gaming commands to keep your community entertained, powerful utility tools for moderation and server management, and a full emoji management suite to upload, delete, and organize emojis effortlessly, PrimeBot packs everything you need into one reliable package—lightweight, fast, and always ready.",
     image: "https://images-ext-1.discordapp.net/external/8_2-oV24CYGRGCBjvNcStL2gNz6VWKloGxcgp3dDRnw/https/cdn.discordapp.com/avatars/1356575287151951943/a_b68e32aef94163405d60d977abe16f69.gif",
     category: "bots",
-    tech: ["discord.js", "C"],
+    tech: ["discord.js", "C"," mySQL"],
     liveUrl: "https://discord.com/oauth2/authorize?client_id=1352315703830773863&permissions=8&integration_type=0&scope=bot",
     
     status: " Active",
     statusColor: "bg-green-500"
-  }{/*,
+  },
   {
     id: "ecommerce-platform",
     title: "E-Commerce Platform",
@@ -88,7 +88,7 @@ const projects: Project[] = [
     githubUrl: "https://github.com/yourusername/fitness-tracker",
     status: "Beta",
     statusColor: "bg-blue-500"
-  }*/}
+  }
 ];
 
 export default function ProjectsSection() {
@@ -121,7 +121,7 @@ export default function ProjectsSection() {
         return "Download";
       default:
         return "View";
-    
+    }
   };
 
   return (
