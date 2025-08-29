@@ -30,8 +30,8 @@ const projects: Project[] = [
     statusColor: "bg-green-500"
   },
   {
-    id: "ecommerce-platform",
-    title: "E-Commerce Platform",
+    id: "SKY",
+    title: "Sky",
     description: "Full-stack e-commerce solution with user authentication, payment processing, inventory management, and admin dashboard.",
     image: "/api/placeholder/400/300",
     category: "websites",
