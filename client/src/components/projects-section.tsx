@@ -32,7 +32,7 @@ const projects: Project[] = [
   {
     id: "pbo",
     title: "PrimeBot",
-    description: "Interactive and dynamic website with dashboard of PrimeBot discord bot",
+    description: "Interactive and dynamic website with dashboard of PrimeBot discord bot (Dashboard will come soon)",
     image: "/primebot.gif",
     category: "websites",
     tech: ["Typescript React", "Node.js", "PostgreSQL"],
