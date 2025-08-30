@@ -21,7 +21,7 @@ const projects: Project[] = [
     id: "PrimeBot",
     title: "PrimeBot",
     description: "PrimeBot is a sleek, multipurpose Discord bot built to supercharge your server with essential tools. It features a dynamic giveaway system with customizable entries, interactive polls for instant feedback, and a ticket system for seamless support handling. With fun gaming commands to keep your community entertained, powerful utility tools for moderation and server management, and a full emoji management suite to upload, delete, and organize emojis effortlessly, PrimeBot packs everything you need into one reliable package—lightweight, fast, and always ready.",
-    image: "https://images-ext-1.discordapp.net/external/8_2-oV24CYGRGCBjvNcStL2gNz6VWKloGxcgp3dDRnw/https/cdn.discordapp.com/avatars/1356575287151951943/a_b68e32aef94163405d60d977abe16f69.gif",
+    image: "/primebot.gif",
     category: "bots",
     tech: ["discord.js", "C"," mySQL"],
     liveUrl: "https://discord.com/oauth2/authorize?client_id=1352315703830773863&permissions=8&integration_type=0&scope=bot",
