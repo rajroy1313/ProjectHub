@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Home from "@/pages/home";
 import Login from "@/pages/login";
 import ProjectRequest from "@/pages/project-request";
+import ProjectPage from "@/pages/project";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/request-project" component={ProjectRequest} />
+      <Route path="/project/:id" component={ProjectPage} />
       <Route component={NotFound} />
     </Switch>
   );

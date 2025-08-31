@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Download, Bot, BarChart3, Terminal } from "lucide-react";
+import { useLocation } from "wouter";
 
 interface Project {
   id: string;
@@ -24,7 +25,7 @@ const projects: Project[] = [
     image: "/primebot.gif",
     category: "bots",
     tech: ["discord.js", "C"," mySQL"],
-    liveUrl: "https://discord.com/oauth2/authorize?client_id=1352315703830773863&permissions=8&integration_type=0&scope=bot",
+    liveUrl: "https://discord.com/oauth2/authorize?client_id=1356575287151951943&permissions=8&integration_type=0&scope=bot%20applications.commands",
 
     status: " Active",
     statusColor: "bg-green-500"
