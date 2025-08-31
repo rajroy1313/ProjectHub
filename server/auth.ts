@@ -34,7 +34,7 @@ if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
     callbackURL: process.env.REPLIT_DOMAINS 
-      ? `https://projecthub-fie.vercel.app/api/auth/discord/callback`
+      ? `https://discord.com/oauth2/authorize?client_id=1410900086463926308&response_type=code&redirect_uri=https%3A%2F%2Fprojecthub-fie.vercel.app%2Fapi%2Fauth%2Fdiscord%2Fcallback&scope=identify+email`
       : "https://discord.com/oauth2/authorize?client_id=1410900086463926308&response_type=code&redirect_uri=https%3A%2F%2Fprojecthub-fie.vercel.app%2Fapi%2Fauth%2Fdiscord%2Fcallback&scope=identify+email",
     scope: ['identify', 'email']
   }, async (accessToken, refreshToken, profile, done) => {
