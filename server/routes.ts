@@ -89,26 +89,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Social auth routes
-  app.get('/api/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-  app.get('/api/auth/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login?error=google_failed' }),
-    (req, res) => {
-      res.redirect('/request-project?login=success');
-    }
-  );
-
+  // Discord OAuth routes
   app.get('/api/auth/discord', passport.authenticate('discord'));
   app.get('/api/auth/discord/callback',
     passport.authenticate('discord', { failureRedirect: '/login?error=discord_failed' }),
-    (req, res) => {
-      res.redirect('/request-project?login=success');
-    }
-  );
-
-  app.get('/api/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
-  app.get('/api/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login?error=facebook_failed' }),
     (req, res) => {
       res.redirect('/request-project?login=success');
     }

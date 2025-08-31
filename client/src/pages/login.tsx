@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocation } from "wouter";
-import { FaGoogle, FaDiscord, FaFacebook } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -253,32 +253,15 @@ export default function LoginPage() {
             <Separator className="bg-slate-600" />
             <p className="text-center text-sm text-slate-400 my-4">Or continue with</p>
             
-            <div className="grid grid-cols-3 gap-3">
-              <Button
-                variant="outline"
-                className="bg-slate-700 border-slate-600 hover:bg-slate-600"
-                onClick={() => window.location.href = "/api/auth/google"}
-                data-testid="button-google-login"
-              >
-                <FaGoogle className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-slate-700 border-slate-600 hover:bg-slate-600"
-                onClick={() => window.location.href = "/api/auth/discord"}
-                data-testid="button-discord-login"
-              >
-                <FaDiscord className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-slate-700 border-slate-600 hover:bg-slate-600"
-                onClick={() => window.location.href = "/api/auth/facebook"}
-                data-testid="button-facebook-login"
-              >
-                <FaFacebook className="h-4 w-4" />
-              </Button>
-            </div>
+            <Button
+              variant="outline"
+              className="w-full bg-slate-700 border-slate-600 hover:bg-slate-600 flex items-center justify-center gap-2"
+              onClick={() => window.location.href = "/api/auth/discord"}
+              data-testid="button-discord-login"
+            >
+              <FaDiscord className="h-4 w-4" />
+              Continue with Discord
+            </Button>
           </div>
         </CardContent>
       </Card>
