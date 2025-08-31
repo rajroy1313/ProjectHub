@@ -206,6 +206,7 @@ export default function ProjectsSection() {
                 <div className="flex gap-4">
                   <Button
                     className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg font-medium transition-colors duration-200"
+                    onClick={() => project.liveUrl && window.open(project.liveUrl, '_blank')}
                     data-testid={`button-demo-${project.id}`}
                   >
                     {getActionIcon(project.category)}
@@ -214,6 +215,7 @@ export default function ProjectsSection() {
                   <Button
                     variant="outline"
                     className="flex-1 border border-slate-600 hover:border-blue-500 hover:text-blue-400 text-slate-300 py-2 rounded-lg font-medium transition-all duration-200 bg-transparent"
+                    onClick={() => project.githubUrl && window.open(project.githubUrl, '_blank')}
                     data-testid={`button-code-${project.id}`}
                   >
                     <Github className="w-4 h-4 mr-2" />
@@ -229,9 +231,10 @@ export default function ProjectsSection() {
         <div className="text-center mt-12">
           <Button
             className="bg-gradient-to-r from-blue-500 to-violet-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             data-testid="button-load-more"
           >
-            View More Projects
+            Back to Top
           </Button>
         </div>
       </div>
