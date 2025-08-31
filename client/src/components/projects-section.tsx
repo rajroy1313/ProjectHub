@@ -25,7 +25,7 @@ const projects: Project[] = [
     category: "bots",
     tech: ["discord.js", "C"," mySQL"],
     liveUrl: "https://discord.com/oauth2/authorize?client_id=1352315703830773863&permissions=8&integration_type=0&scope=bot",
-    
+
     status: " Active",
     statusColor: "bg-green-500"
   },
@@ -94,8 +94,8 @@ const projects: Project[] = [
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  const filteredProjects = activeFilter === "all" 
-    ? projects 
+  const filteredProjects = activeFilter === "all"
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
   const getActionIcon = (category: Project["category"]) => {
@@ -170,7 +170,7 @@ export default function ProjectsSection() {
               data-testid={`project-card-${project.id}`}
             >
               <div className="relative overflow-hidden">
-                <img 
+                <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
@@ -180,7 +180,7 @@ export default function ProjectsSection() {
                   {project.status}
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">
                   {project.title}
@@ -188,7 +188,7 @@ export default function ProjectsSection() {
                 <p className="text-slate-300 mb-4 text-sm leading-relaxed">
                   {project.description}
                 </p>
-                
+
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((tech) => (
@@ -201,7 +201,7 @@ export default function ProjectsSection() {
                     </Badge>
                   ))}
                 </div>
-                
+
                 {/* Action Buttons */}
                 <div className="flex gap-4">
                   <Button
@@ -212,15 +212,17 @@ export default function ProjectsSection() {
                     {getActionIcon(project.category)}
                     {getActionText(project.category)}
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="flex-1 border border-slate-600 hover:border-blue-500 hover:text-blue-400 text-slate-300 py-2 rounded-lg font-medium transition-all duration-200 bg-transparent"
-                    onClick={() => project.githubUrl && window.open(project.githubUrl, '_blank')}
-                    data-testid={`button-code-${project.id}`}
-                  >
-                    <Github className="w-4 h-4 mr-2" />
-                    Code
-                  </Button>
+                  {project.githubUrl && (
+                    <Button
+                      variant="outline"
+                      className="flex-1 border border-slate-600 hover:border-blue-500 hover:text-blue-400 text-slate-300 py-2 rounded-lg font-medium transition-all duration-200 bg-transparent"
+                      onClick={() => project.githubUrl && window.open(project.githubUrl, '_blank')}
+                      data-testid={`button-code-${project.id}`}
+                    >
+                      <Github className="w-4 h-4 mr-2" />
+                      Code
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
