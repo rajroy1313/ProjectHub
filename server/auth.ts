@@ -30,12 +30,20 @@ passport.use(new LocalStrategy({
 
 // Discord OAuth strategy
 if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
+  const getCallbackURL = () => {
+    if (process.env.REPLIT_DOMAINS) {
+      return `https://${process.env.REPLIT_DOMAINS}/api/auth/discord/callback`;
+    }
+    if (process.env.VERCEL_URL) {
+      return `https://${process.env.VERCEL_URL}/api/auth/discord/callback`;
+    }
+    return "https://projecthub-fie.vercel.app/api/auth/discord/callback";
+  };
+
   passport.use(new DiscordStrategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: process.env.REPLIT_DOMAINS 
-      ? `https://${process.env.REPLIT_DOMAINS}/api/auth/discord/callback`
-      : "https://projecthub-fie.vercel.app/api/auth/discord/callback",
+    callbackURL: getCallbackURL(),
     scope: ['identify', 'email']
   }, async (accessToken, refreshToken, profile, done) => {
     try {
