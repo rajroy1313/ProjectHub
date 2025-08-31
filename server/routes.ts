@@ -108,6 +108,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Contact form endpoint
+  app.post('/api/contact', async (req, res) => {
+    try {
+      const { name, email, subject, message } = req.body;
+      
+      // Here you would integrate with an email service
+      // For now, we'll just log the contact form data
+      console.log('Contact form submission:', { name, email, subject, message });
+      
+      // You can add email sending logic here using services like:
+      // - Nodemailer with SMTP
+      // - SendGrid
+      // - Amazon SES
+      // - Mailgun
+      
+      res.json({ message: "Contact form submitted successfully" });
+    } catch (error) {
+      console.error('Contact form error:', error);
+      res.status(500).json({ message: "Failed to submit contact form" });
+    }
+  });
+
   // Project request routes
   app.post('/api/project-requests', requireAuth, async (req, res) => {
     try {
