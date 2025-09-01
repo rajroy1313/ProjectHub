@@ -1,26 +1,47 @@
-import { storage } from "../server/storage.js";
-import { insertProjectRequestSchema } from "../shared/schema.js";
+const { randomUUID } = require("crypto");
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      // In serverless environment, we'll skip authentication for now
-      // and use a default user ID or handle it differently
-      const validatedData = insertProjectRequestSchema.parse({
-        ...req.body,
-        userId: req.body.userId || 'default-user'
-      });
+      const { title, description, budget, timeline, requirements } = req.body;
       
-      const projectRequest = await storage.createProjectRequest(validatedData);
-      res.json(projectRequest);
+      // Basic validation
+      if (!title || !description) {
+        return res.status(400).json({ message: "Title and description are required" });
+      }
+
+      // For demo purposes, create a mock project request
+      const projectRequest = {
+        id: randomUUID(),
+        title,
+        description,
+        budget,
+        timeline,
+        requirements,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
+      
+      res.json({ 
+        message: "Project request created successfully",
+        projectRequest 
+      });
     } catch (error) {
       console.error('Project request creation error:', error);
       res.status(500).json({ message: "Failed to create project request" });
     }
   } else if (req.method === 'GET') {
     try {
-      const userId = req.query.userId || 'default-user';
-      const requests = await storage.getProjectRequests(userId);
+      // Return mock project requests for demo
+      const requests = [
+        {
+          id: "demo-request-1",
+          title: "Sample Project",
+          description: "This is a demo project request",
+          status: "pending",
+          createdAt: new Date().toISOString()
+        }
+      ];
       res.json(requests);
     } catch (error) {
       console.error('Project requests fetch error:', error);
