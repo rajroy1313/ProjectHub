@@ -113,15 +113,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { name, email, subject, message } = req.body;
       
-      // Here you would integrate with an email service
-      // For now, we'll just log the contact form data
-      console.log('Contact form submission:', { name, email, subject, message });
+      // Import nodemailer
+      const nodemailer = require('nodemailer');
       
-      // You can add email sending logic here using services like:
-      // - Nodemailer with SMTP
-      // - SendGrid
-      // - Amazon SES
-      // - Mailgun
+      // Create transporter using Gmail SMTP
+      const transporter = nodemailer.createTransporter({
+        service: 'gmail',
+        auth: {
+          user: process.env.GMAIL_USER || 'yuborajroy00@gmail.com',
+          pass: process.env.GMAIL_APP_PASSWORD // App password, not regular password
+        }
+      });
+      
+      // Email content
+      const mailOptions = {
+        from: `"Contact Form" <${process.env.GMAIL_USER || 'yuborajroy00@gmail.com'}>`,
+        to: 'yuborajroy00@gmail.com',
+        subject: `New Contact Form: ${subject}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+          <hr>
+          <p><em>Sent from ProjectHub contact form</em></p>
+        `,
+        replyTo: email
+      };
+      
+      // Send email
+      await transporter.sendMail(mailOptions);
       
       res.json({ message: "Contact form submitted successfully" });
     } catch (error) {
