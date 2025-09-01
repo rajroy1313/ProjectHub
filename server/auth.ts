@@ -28,12 +28,9 @@ passport.use(new LocalStrategy({
 }));
 
 
-// Discord OAuth strategy
-if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
+// Discord OAuth strategy - only on Vercel
+if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET && (process.env.VERCEL_URL || process.env.VERCEL)) {
   const getCallbackURL = () => {
-    if (process.env.REPLIT_DOMAINS) {
-      return `https://${process.env.REPLIT_DOMAINS}/api/auth/discord/callback`;
-    }
     if (process.env.VERCEL_URL) {
       return `https://${process.env.VERCEL_URL}/api/auth/discord/callback`;
     }

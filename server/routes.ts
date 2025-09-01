@@ -89,14 +89,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Discord OAuth routes
-  app.get('/api/auth/discord', passport.authenticate('discord'));
-  app.get('/api/auth/discord/callback',
-    passport.authenticate('discord', { failureRedirect: '/login?error=discord_failed' }),
-    (req, res) => {
-      res.redirect('/request-project?login=success');
-    }
-  );
+  // Discord OAuth routes - only on Vercel
+  if (process.env.VERCEL_URL || process.env.VERCEL) {
+    app.get('/api/auth/discord', passport.authenticate('discord'));
+    app.get('/api/auth/discord/callback',
+      passport.authenticate('discord', { failureRedirect: '/login?error=discord_failed' }),
+      (req, res) => {
+        res.redirect('/request-project?login=success');
+      }
+    );
+  }
 
   // Get current user
   app.get('/api/auth/me', (req, res) => {
