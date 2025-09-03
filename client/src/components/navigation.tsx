@@ -43,7 +43,13 @@ export default function Navigation() {
           <div className="hidden md:flex space-x-8">
             <NavLink href="home">Home</NavLink>
             <NavLink href="projects">Projects</NavLink>
-            <NavLink href="request-project" Disabled>Request Project</NavLink>
+            <button
+              onClick={() => window.location.href = "/request-project"}
+              className="text-slate-300 hover:text-blue-400 transition-colors duration-200"
+              data-testid="nav-link-request-project"
+            >
+              Request Project
+            </button>
             <NavLink href="skills">Skills</NavLink>
             <NavLink href="about">About</NavLink>
             <NavLink href="contact">Contact</NavLink>
@@ -81,7 +87,16 @@ export default function Navigation() {
                 <div className="flex flex-col space-y-6 mt-8">
                   <NavLink href="home">Home</NavLink>
                   <NavLink href="projects">Projects</NavLink>
-                  <NavLink href="request-project">Request Project</NavLink>
+                  <button
+                    onClick={() => {
+                      window.location.href = "/request-project";
+                      setIsOpen(false);
+                    }}
+                    className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-left"
+                    data-testid="mobile-nav-link-request-project"
+                  >
+                    Request Project
+                  </button>
                   <NavLink href="skills">Skills</NavLink>
                   <NavLink href="about">About</NavLink>
                   <NavLink href="contact">Contact</NavLink>
