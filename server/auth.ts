@@ -11,18 +11,28 @@ passport.use(new LocalStrategy({
   passwordField: 'password'
 }, async (email, password, done) => {
   try {
+    console.log('Attempting login for email:', email);
+    
+    if (!email || !password) {
+      return done(null, false, { message: 'Email and password are required' });
+    }
+
     const user = await storage.getUserByEmail(email);
     if (!user || !user.password) {
+      console.log('User not found or no password:', email);
       return done(null, false, { message: 'Invalid email or password' });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
+      console.log('Invalid password for user:', email);
       return done(null, false, { message: 'Invalid email or password' });
     }
 
+    console.log('Login successful for user:', email);
     return done(null, user);
   } catch (error) {
+    console.error('Login error:', error);
     return done(error);
   }
 }));
