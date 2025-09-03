@@ -103,7 +103,7 @@ export default function LoginPage() {
               <TabsTrigger value="login" className="data-[state=active]:bg-blue-600">Login</TabsTrigger>
               <TabsTrigger value="register" className="data-[state=active]:bg-blue-600">Register</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="login" className="space-y-4">
               <Form {...loginForm}>
                 <form onSubmit={loginForm.handleSubmit(onLogin)} className="space-y-4">
@@ -156,7 +156,7 @@ export default function LoginPage() {
                 </form>
               </Form>
             </TabsContent>
-            
+
             <TabsContent value="register" className="space-y-4">
               <Form {...registerForm}>
                 <form onSubmit={registerForm.handleSubmit(onRegister)} className="space-y-4">
@@ -248,12 +248,12 @@ export default function LoginPage() {
               </Form>
             </TabsContent>
           </Tabs>
-          
+
           {(window.location.hostname.includes('vercel.app') || window.location.hostname.includes('vercel.com')) && (
             <div className="mt-6">
               <Separator className="bg-slate-600" />
               <p className="text-center text-sm text-slate-400 my-4">Or continue with</p>
-              
+
               <Button
                 variant="outline"
                 className="w-full bg-slate-700 border-slate-600 hover:bg-slate-600 flex items-center justify-center gap-2"

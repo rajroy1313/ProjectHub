@@ -18,7 +18,7 @@ function requireAuth(req: any, res: any, next: any) {
 export async function registerRoutes(app: Express): Promise<Server> {
   // Session configuration with PostgreSQL store
   const pgStore = connectPg(session);
-  
+
   app.use(session({
     store: new pgStore({
       conString: process.env.DATABASE_URL,
@@ -42,7 +42,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/auth/register', async (req, res) => {
     try {
       const { email, password, firstName, lastName } = req.body;
-      
+
       // Check if user already exists
       const existingUser = await storage.getUserByEmail(email);
       if (existingUser) {
@@ -51,8 +51,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
-      
-      // Create user  
+
+      // Create user
       const { randomUUID } = await import("crypto");
       const user = await storage.upsertUser({
         id: randomUUID(),
@@ -114,10 +114,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/contact', async (req, res) => {
     try {
       const { name, email, subject, message } = req.body;
-      
+
       // Import nodemailer
       const nodemailer = require('nodemailer');
-      
+
       // Create transporter using Gmail SMTP
       const transporter = nodemailer.createTransporter({
         service: 'gmail',
@@ -126,7 +126,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           pass: process.env.GMAIL_APP_PASSWORD // App password, not regular password
         }
       });
-      
+
       // Email content
       const mailOptions = {
         from: `"Contact Form" <${process.env.GMAIL_USER || 'yuborajroy00@gmail.com'}>`,
@@ -144,10 +144,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         `,
         replyTo: email
       };
-      
+
       // Send email
       await transporter.sendMail(mailOptions);
-      
+
       res.json({ message: "Contact form submitted successfully" });
     } catch (error) {
       console.error('Contact form error:', error);
@@ -163,7 +163,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...req.body,
         userId: user.id
       });
-      
+
       const projectRequest = await storage.createProjectRequest(validatedData);
       res.json(projectRequest);
     } catch (error) {

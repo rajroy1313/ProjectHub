@@ -45,7 +45,7 @@ if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET && (proce
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       let user = await storage.getUserBySocialId('discord', profile.id);
-      
+
       if (!user) {
         user = await storage.upsertUser({
           id: profile.id,
@@ -56,7 +56,7 @@ if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET && (proce
           profileImageUrl: profile.avatar ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png` : null,
         });
       }
-      
+
       return done(null, user);
     } catch (error) {
       return done(error);
