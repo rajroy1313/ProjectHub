@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Github, Twitter, Facebook, ChevronDown } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLocation } from "wouter";
 
 export default function HeroSection() {
+  const [, setLocation] = useLocation();
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -25,7 +27,7 @@ export default function HeroSection() {
   useEffect(() => {
     const typeText = () => {
       const currentText = typingTexts[currentTextIndex];
-      
+
       if (isDeleting) {
         setCurrentCharIndex(prev => prev - 1);
       } else {
@@ -80,7 +82,7 @@ export default function HeroSection() {
             ProjectHub
           </span>
         </h1>
-        
+
         <p className="text-lg md:text-xl lg:text-2xl text-slate-300 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
           Full Stack Developer specializing in{" "}
           <span className="text-blue-400 font-medium">Web Applications</span>, 
@@ -102,18 +104,18 @@ export default function HeroSection() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-8 md:mb-12 px-4">
           <Button
+            size="lg"
+            className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600 text-lg px-8 py-6 mr-4"
+            onClick={() => setLocation("/request-project")}
+          >
+            Request Your Project
+          </Button>
+          <Button
             onClick={() => handleScroll("projects")}
             className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-violet-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1 text-sm md:text-base min-h-[48px]"
             data-testid="button-view-work"
           >
             View our Work
-          </Button>
-          <Button
-            onClick={() => window.location.href = "/request-project"}
-            className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:-translate-y-1 text-sm md:text-base min-h-[48px]"
-            data-testid="button-request-project"
-           >
-            Request Your Project
           </Button>
           <Button
             variant="outline"

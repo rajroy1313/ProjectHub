@@ -43,13 +43,12 @@ export default function Navigation() {
           <div className="hidden md:flex space-x-8">
             <NavLink href="home">Home</NavLink>
             <NavLink href="projects">Projects</NavLink>
-            <button
+            <Button
+              className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600 mr-3"
               onClick={() => window.location.href = "/request-project"}
-              className="text-slate-300 hover:text-blue-400 transition-colors duration-200"
-              data-testid="nav-link-request-project"
             >
               Request Project
-            </button>
+            </Button>
             <NavLink href="skills">Skills</NavLink>
             <NavLink href="about">About</NavLink>
             <NavLink href="contact">Contact</NavLink>
