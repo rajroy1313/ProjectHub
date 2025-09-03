@@ -38,11 +38,14 @@ passport.use(new LocalStrategy({
 }));
 
 
-// Discord OAuth strategy - only on Vercel
-if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET && (process.env.VERCEL_URL || process.env.VERCEL)) {
+// Discord OAuth strategy - enabled when Discord credentials are available
+if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
   const getCallbackURL = () => {
     if (process.env.VERCEL_URL) {
       return `https://${process.env.VERCEL_URL}/api/auth/discord/callback`;
+    }
+    if (process.env.REPL_SLUG && process.env.REPL_OWNER) {
+      return `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/api/auth/discord/callback`;
     }
     return "https://projecthub-fie.vercel.app/api/auth/discord/callback";
   };

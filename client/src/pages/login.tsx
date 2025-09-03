@@ -249,22 +249,20 @@ export default function LoginPage() {
             </TabsContent>
           </Tabs>
 
-          {(window.location.hostname.includes('vercel.app') || window.location.hostname.includes('vercel.com')) && (
-            <div className="mt-6">
-              <Separator className="bg-slate-600" />
-              <p className="text-center text-sm text-slate-400 my-4">Or continue with</p>
+          <div className="mt-6">
+            <Separator className="bg-slate-600" />
+            <p className="text-center text-sm text-slate-400 my-4">Or continue with</p>
 
-              <Button
-                variant="outline"
-                className="w-full bg-slate-700 border-slate-600 hover:bg-slate-600 flex items-center justify-center gap-2"
-                onClick={() => window.location.href = "/api/auth/discord"}
-                data-testid="button-discord-login"
-              >
-                <FaDiscord className="h-4 w-4" />
-                Continue with Discord
-              </Button>
-            </div>
-          )}
+            <Button
+              variant="outline"
+              className="w-full bg-slate-700 border-slate-600 hover:bg-slate-600 flex items-center justify-center gap-2"
+              onClick={() => window.location.href = "/api/auth/discord"}
+              data-testid="button-discord-login"
+            >
+              <FaDiscord className="h-4 w-4" />
+              Continue with Discord
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>

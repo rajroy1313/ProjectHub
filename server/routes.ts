@@ -108,8 +108,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Discord OAuth routes - only on Vercel
-  if (process.env.VERCEL_URL || process.env.VERCEL) {
+  // Discord OAuth routes - enabled when Discord credentials are available
+  if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
     app.get('/api/auth/discord', passport.authenticate('discord'));
     app.get('/api/auth/discord/callback',
       passport.authenticate('discord', { failureRedirect: '/login?error=discord_failed' }),
