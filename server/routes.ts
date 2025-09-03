@@ -90,7 +90,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!user) {
         return res.status(401).json({ message: info?.message || "Invalid email or password" });
       }
-      
+
       req.login(user, (loginErr) => {
         if (loginErr) {
           return res.status(500).json({ message: "Login failed" });
