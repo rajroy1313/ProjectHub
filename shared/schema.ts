@@ -1,49 +1,51 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, jsonb, index } from "drizzle-orm/pg-core";
+import { mysqlTable, text, varchar, timestamp, json, index } from "drizzle-orm/mysql-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 // Session storage table for authentication
-export const sessions = pgTable(
+export const sessions = mysqlTable(
   "sessions",
   {
-    sid: varchar("sid").primaryKey(),
-    sess: jsonb("sess").notNull(),
+    sid: varchar("sid", { length: 255 }).primaryKey(),
+    sess: json("sess").notNull(),
     expire: timestamp("expire").notNull(),
   },
-  (table) => [index("IDX_session_expire").on(table.expire)],
+  (table) => ({
+    sessionExpireIdx: index("IDX_session_expire").on(table.expire),
+  }),
 );
 
 // Users table with social authentication support
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  email: varchar("email").unique(),
-  firstName: varchar("first_name"),
-  lastName: varchar("last_name"),
-  profileImageUrl: varchar("profile_image_url"),
+export const users = mysqlTable("users", {
+  id: varchar("id", { length: 36 }).primaryKey().default(sql`(UUID())`),
+  email: varchar("email", { length: 255 }).unique(),
+  firstName: varchar("first_name", { length: 255 }),
+  lastName: varchar("last_name", { length: 255 }),
+  profileImageUrl: varchar("profile_image_url", { length: 500 }),
   // Social provider IDs
-  googleId: varchar("google_id").unique(),
-  discordId: varchar("discord_id").unique(),
-  facebookId: varchar("facebook_id").unique(),
+  googleId: varchar("google_id", { length: 255 }).unique(),
+  discordId: varchar("discord_id", { length: 255 }).unique(),
+  facebookId: varchar("facebook_id", { length: 255 }).unique(),
   // Traditional email/password (optional)
   username: text("username").unique(),
   password: text("password"),
   createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
 
 // Project requests table
-export const projectRequests = pgTable("project_requests", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: varchar("user_id").references(() => users.id).notNull(),
+export const projectRequests = mysqlTable("project_requests", {
+  id: varchar("id", { length: 36 }).primaryKey().default(sql`(UUID())`),
+  userId: varchar("user_id", { length: 36 }).references(() => users.id).notNull(),
   title: text("title").notNull(),
   description: text("description").notNull(),
-  budget: varchar("budget"),
-  timeline: varchar("timeline"),
-  technologies: text("technologies").array(),
-  status: varchar("status").default("pending"), // pending, approved, rejected, in-progress, completed
+  budget: varchar("budget", { length: 100 }),
+  timeline: varchar("timeline", { length: 100 }),
+  technologies: json("technologies").$type<string[]>(),
+  status: varchar("status", { length: 50 }).default("pending"), // pending, approved, rejected, in-progress, completed
   createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
 
 // Schemas for validation

@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import session from "express-session";
-import connectPg from "connect-pg-simple";
+import MySQLStore from "express-mysql-session";
 import bcrypt from "bcryptjs";
 import { storage } from "./storage";
 import passport from "./auth";
@@ -16,14 +16,16 @@ function requireAuth(req: any, res: any, next: any) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Session configuration with PostgreSQL store
-  const pgStore = connectPg(session);
+  // Session configuration with MySQL store
+  const MySQLSessionStore = MySQLStore(session);
 
   app.use(session({
-    store: new pgStore({
-      conString: process.env.DATABASE_URL,
-      tableName: 'sessions',
-      createTableIfMissing: true
+    store: new MySQLSessionStore({
+      connectionString: process.env.DATABASE_URL,
+      createDatabaseTable: true,
+      schema: {
+        tableName: 'sessions'
+      }
     }),
     secret: process.env.SESSION_SECRET || 'fallback-secret-key',
     resave: false,

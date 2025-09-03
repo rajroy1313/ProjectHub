@@ -56,27 +56,63 @@ export class DatabaseStorage implements IStorage {
   }
 
   async upsertUser(userData: UpsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(userData)
-      .onConflictDoUpdate({
-        target: users.id,
-        set: {
+    // Check if user exists by ID
+    let existingUser: User | undefined;
+    if (userData.id) {
+      existingUser = await this.getUser(userData.id);
+    }
+    
+    if (existingUser) {
+      // Update existing user
+      await db
+        .update(users)
+        .set({
           ...userData,
           updatedAt: new Date(),
-        },
-      })
-      .returning();
-    return user;
+        })
+        .where(eq(users.id, userData.id!));
+      
+      // Return updated user
+      const updatedUser = await this.getUser(userData.id!);
+      return updatedUser!;
+    } else {
+      // Generate ID if not provided
+      const { randomUUID } = await import("crypto");
+      const userId = userData.id || randomUUID();
+      
+      const userWithId = {
+        ...userData,
+        id: userId
+      };
+      
+      // Insert new user
+      await db.insert(users).values(userWithId);
+      
+      // Return inserted user
+      const newUser = await this.getUser(userId);
+      return newUser!;
+    }
   }
 
   // Project request operations
   async createProjectRequest(requestData: InsertProjectRequest): Promise<ProjectRequest> {
-    const [request] = await db
-      .insert(projectRequests)
-      .values(requestData)
-      .returning();
-    return request;
+    // Generate a UUID for the request
+    const { randomUUID } = await import("crypto");
+    const requestId = randomUUID();
+    
+    const requestWithId = {
+      ...requestData,
+      id: requestId
+    };
+    
+    await db.insert(projectRequests).values(requestWithId);
+    
+    // Return the created request
+    const [createdRequest] = await db
+      .select()
+      .from(projectRequests)
+      .where(eq(projectRequests.id, requestId));
+    return createdRequest;
   }
 
   async getProjectRequests(userId: string): Promise<ProjectRequest[]> {
@@ -88,12 +124,17 @@ export class DatabaseStorage implements IStorage {
   }
 
   async updateProjectRequestStatus(id: string, status: string): Promise<ProjectRequest> {
-    const [request] = await db
+    await db
       .update(projectRequests)
       .set({ status, updatedAt: new Date() })
-      .where(eq(projectRequests.id, id))
-      .returning();
-    return request;
+      .where(eq(projectRequests.id, id));
+    
+    // Return the updated request
+    const [updatedRequest] = await db
+      .select()
+      .from(projectRequests)
+      .where(eq(projectRequests.id, id));
+    return updatedRequest;
   }
 }
 
