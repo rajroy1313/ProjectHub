@@ -32,7 +32,7 @@ export const users = pgTable("users", {
   username: text("username").unique(),
   password: text("password"),
   createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
+  updatedAt: timestamp("updated_at").defaultNow().$onUpdate(() => new Date()),
 });
 
 // Project requests table
@@ -46,7 +46,7 @@ export const projectRequests = pgTable("project_requests", {
   technologies: jsonb("technologies").$type<string[]>(),
   status: varchar("status", { length: 50 }).default("pending"), // pending, approved, rejected, in-progress, completed
   createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
+  updatedAt: timestamp("updated_at").defaultNow().$onUpdate(() => new Date()),
 });
 
 // Schemas for validation
