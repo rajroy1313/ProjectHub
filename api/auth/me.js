@@ -10,16 +10,8 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    // For demo purposes, return a mock user for Vercel
-    // In production, you would implement proper JWT or other stateless auth
-    res.json({
-      user: {
-        id: 'vercel-demo-user',
-        email: 'demo@vercel.app',
-        firstName: 'Demo',
-        lastName: 'User'
-      }
-    });
+    // Return 401 for unauthenticated users - they need to log in first
+    res.status(401).json({ message: "Not authenticated" });
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }

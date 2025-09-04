@@ -10,22 +10,25 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    // For demo purposes, accept any login for Vercel
-    // In production, you would implement proper authentication
     const { email, password } = req.body;
     
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password are required" });
     }
 
-    res.json({
-      user: {
-        id: 'vercel-demo-user',
-        email: email,
-        firstName: 'Demo',
-        lastName: 'User'
-      }
-    });
+    // Simple demo validation - in production use proper auth
+    if (email && password) {
+      res.json({
+        user: {
+          id: 'user-' + Date.now(),
+          email: email,
+          firstName: email.split('@')[0],
+          lastName: 'User'
+        }
+      });
+    } else {
+      res.status(401).json({ message: "Invalid email or password" });
+    }
   } else {
     res.status(405).json({ message: "Method not allowed" });
   }

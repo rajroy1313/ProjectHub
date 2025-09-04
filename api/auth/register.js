@@ -10,17 +10,16 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    // For demo purposes, accept any registration for Vercel
-    // In production, you would implement proper user creation
     const { email, password, firstName, lastName } = req.body;
     
     if (!email || !password || !firstName || !lastName) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    // Simple demo registration - in production use proper auth
     res.json({
       user: {
-        id: 'vercel-demo-user',
+        id: 'user-' + Date.now(),
         email: email,
         firstName: firstName,
         lastName: lastName
