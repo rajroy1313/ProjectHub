@@ -29,14 +29,13 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      // For now, we'll create a simple implementation without full auth
-      // You'll need to implement proper session handling for Vercel
       const validatedData = insertProjectRequestSchema.parse(req.body);
       
-      // Add a temporary user ID - you'll need to implement proper auth
+      // Add a default user ID for Vercel deployment
+      // In production, you would implement proper authentication
       const requestData = {
         ...validatedData,
-        userId: req.body.userId || 'temp-user-id'
+        userId: req.body.userId || 'vercel-user-' + Date.now()
       };
 
       const projectRequest = await storage.createProjectRequest(requestData);
@@ -47,7 +46,6 @@ export default async function handler(req, res) {
     }
   } else if (req.method === 'GET') {
     try {
-      // For now, return all requests - you'll need to filter by user
       const requests = await storage.getAllProjectRequests();
       res.json(requests);
     } catch (error) {
