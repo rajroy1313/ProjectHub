@@ -43,7 +43,7 @@ async function testDatabaseConnection() {
     await connection`SELECT 1`;
     console.log("✅ Database connected successfully");
   } catch (error) {
-    console.error("❌ Database connection failed:", error.message);
+    console.error("❌ Database connection failed:", (error as Error).message);
     console.log("🔄 Server will continue without database...");
   }
 }
