@@ -43,12 +43,6 @@ const DISCORD_CLIENT_ID = "1410900086463926308";
 const DISCORD_CLIENT_SECRET = "z7Hf45mm7_rzVrNpKUbnY9gaLZ714nle";
 
 const getCallbackURL = () => {
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}/api/auth/discord/callback`;
-  }
-  if (process.env.REPL_SLUG && process.env.REPL_OWNER) {
-    return `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/api/auth/discord/callback`;
-  }
   return "https://projecthub-fie.vercel.app/api/auth/discord/callback";
 };
 
