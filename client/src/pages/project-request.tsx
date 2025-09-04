@@ -223,26 +223,14 @@ export default function ProjectRequestPage() {
                     />
                   </div>
 
-                  <div className="flex gap-4">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="flex-1 bg-slate-700 border-slate-600 text-white hover:bg-slate-600"
-                      onClick={() => form.reset()}
-                      disabled={createRequestMutation.isPending}
-                      data-testid="button-reset-form"
-                    >
-                      Reset Form
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600"
-                      disabled={createRequestMutation.isPending}
-                      data-testid="button-submit-request"
-                    >
-                      {createRequestMutation.isPending ? "Submitting..." : "Submit Project Request"}
-                    </Button>
-                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600"
+                    disabled={createRequestMutation.isPending}
+                    data-testid="button-submit-request"
+                  >
+                    {createRequestMutation.isPending ? "Submitting..." : "Submit Project Request"}
+                  </Button>
                 </form>
               </Form>
             </CardContent>
