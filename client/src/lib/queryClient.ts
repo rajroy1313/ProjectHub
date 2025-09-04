@@ -29,8 +29,17 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
+    // Get session token for Vercel stateless auth
+    const sessionToken = localStorage.getItem('userSession');
+    const headers: Record<string, string> = {};
+    
+    if (sessionToken) {
+      headers['X-User-Session'] = sessionToken;
+    }
+
     const res = await fetch(queryKey.join("/") as string, {
       credentials: "include",
+      headers,
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {

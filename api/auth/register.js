@@ -17,13 +17,20 @@ export default async function handler(req, res) {
     }
 
     // Simple demo registration - in production use proper auth
+    const userData = {
+      id: 'user-' + Date.now(),
+      email: email,
+      firstName: firstName,
+      lastName: lastName
+    };
+    
+    // Create a simple session token for stateless authentication
+    const sessionToken = Buffer.from(JSON.stringify(userData)).toString('base64');
+    
+    res.setHeader('X-User-Session', sessionToken);
     res.json({
-      user: {
-        id: 'user-' + Date.now(),
-        email: email,
-        firstName: firstName,
-        lastName: lastName
-      }
+      user: userData,
+      sessionToken: sessionToken
     });
   } else {
     res.status(405).json({ message: "Method not allowed" });

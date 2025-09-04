@@ -33,6 +33,10 @@ export function useAuth() {
       return response.json();
     },
     onSuccess: (data) => {
+      // Store session token for Vercel stateless auth
+      if (data.sessionToken) {
+        localStorage.setItem('userSession', data.sessionToken);
+      }
       // Immediately set the user data to avoid timing issues
       queryClient.setQueryData(["/api/auth/me"], data);
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
@@ -61,6 +65,10 @@ export function useAuth() {
       return response.json();
     },
     onSuccess: (data) => {
+      // Store session token for Vercel stateless auth
+      if (data.sessionToken) {
+        localStorage.setItem('userSession', data.sessionToken);
+      }
       // Immediately set the user data to avoid timing issues
       queryClient.setQueryData(["/api/auth/me"], data);
       queryClient.invalidateQueries({ queryKey: ["/api/auth/me"] });
@@ -72,6 +80,8 @@ export function useAuth() {
       await apiRequest("/api/auth/logout", "POST");
     },
     onSuccess: () => {
+      // Clear stored session token
+      localStorage.removeItem('userSession');
       queryClient.clear();
       window.location.href = "/";
     },

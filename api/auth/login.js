@@ -18,13 +18,20 @@ export default async function handler(req, res) {
 
     // Simple demo validation - in production use proper auth
     if (email && password) {
+      const userData = {
+        id: 'user-' + Date.now(),
+        email: email,
+        firstName: email.split('@')[0],
+        lastName: 'User'
+      };
+      
+      // Create a simple session token for stateless authentication
+      const sessionToken = Buffer.from(JSON.stringify(userData)).toString('base64');
+      
+      res.setHeader('X-User-Session', sessionToken);
       res.json({
-        user: {
-          id: 'user-' + Date.now(),
-          email: email,
-          firstName: email.split('@')[0],
-          lastName: 'User'
-        }
+        user: userData,
+        sessionToken: sessionToken
       });
     } else {
       res.status(401).json({ message: "Invalid email or password" });
