@@ -1,7 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import session from "express-session";
-import MySQLStore from "express-mysql-session";
 import bcrypt from "bcryptjs";
 import { storage } from "./storage";
 import passport from "./auth";
@@ -16,17 +15,9 @@ function requireAuth(req: any, res: any, next: any) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Session configuration with MySQL store
-  const MySQLSessionStore = MySQLStore(session);
-
+  // Session configuration with memory store (for now)
   app.use(session({
-    store: new MySQLSessionStore({
-      connectionString: process.env.DATABASE_URL,
-      createDatabaseTable: true,
-      schema: {
-        tableName: 'sessions'
-      }
-    }),
+    store: undefined, // Use memory store for now
     secret: process.env.SESSION_SECRET || 'fallback-secret-key',
     resave: false,
     saveUninitialized: false,

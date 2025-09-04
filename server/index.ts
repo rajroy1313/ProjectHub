@@ -40,9 +40,8 @@ app.use((req, res, next) => {
 // Test database connection
 async function testDatabaseConnection() {
   try {
-    const conn = await connection.getConnection();
+    await connection`SELECT 1`;
     console.log("✅ Database connected successfully");
-    conn.release();
   } catch (error) {
     console.error("❌ Database connection failed:", error.message);
     console.log("🔄 Server will continue without database...");

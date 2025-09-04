@@ -1,14 +1,15 @@
 import { sql } from "drizzle-orm";
-import { mysqlTable, text, varchar, timestamp, json, index } from "drizzle-orm/mysql-core";
+import { index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { pgTable, varchar, text, timestamp, jsonb, uuid } from "drizzle-orm/pg-core";
 
 // Session storage table for authentication
-export const sessions = mysqlTable(
+export const sessions = pgTable(
   "sessions",
   {
     sid: varchar("sid", { length: 255 }).primaryKey(),
-    sess: json("sess").notNull(),
+    sess: jsonb("sess").notNull(),
     expire: timestamp("expire").notNull(),
   },
   (table) => ({
@@ -17,8 +18,8 @@ export const sessions = mysqlTable(
 );
 
 // Users table with social authentication support
-export const users = mysqlTable("users", {
-  id: varchar("id", { length: 36 }).primaryKey().default(sql`(UUID())`),
+export const users = pgTable("users", {
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
   email: varchar("email", { length: 255 }).unique(),
   firstName: varchar("first_name", { length: 255 }),
   lastName: varchar("last_name", { length: 255 }),
@@ -35,14 +36,14 @@ export const users = mysqlTable("users", {
 });
 
 // Project requests table
-export const projectRequests = mysqlTable("project_requests", {
-  id: varchar("id", { length: 36 }).primaryKey().default(sql`(UUID())`),
-  userId: varchar("user_id", { length: 36 }).references(() => users.id).notNull(),
+export const projectRequests = pgTable("project_requests", {
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: uuid("user_id").references(() => users.id).notNull(),
   title: text("title").notNull(),
   description: text("description").notNull(),
   budget: varchar("budget", { length: 100 }),
   timeline: varchar("timeline", { length: 100 }),
-  technologies: json("technologies").$type<string[]>(),
+  technologies: jsonb("technologies").$type<string[]>(),
   status: varchar("status", { length: 50 }).default("pending"), // pending, approved, rejected, in-progress, completed
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),

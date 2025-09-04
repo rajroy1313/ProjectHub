@@ -1,5 +1,5 @@
-import mysql from 'mysql2/promise';
-import { drizzle } from 'drizzle-orm/mysql2';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
 if (!process.env.DATABASE_URL) {
@@ -8,15 +8,11 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// Create connection pool for better connection management
-export const connection = mysql.createPool({
-  uri: process.env.DATABASE_URL,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-  acquireTimeout: 60000,
-  timeout: 60000,
-  reconnect: true
+// Create PostgreSQL connection
+export const connection = postgres(process.env.DATABASE_URL, {
+  max: 10,
+  idle_timeout: 20,
+  connect_timeout: 10,
 });
 
-export const db = drizzle(connection, { schema, mode: 'default' });
+export const db = drizzle(connection, { schema });
