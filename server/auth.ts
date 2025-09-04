@@ -38,44 +38,45 @@ passport.use(new LocalStrategy({
 }));
 
 
-// Discord OAuth strategy - enabled when Discord credentials are available
-if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
-  const getCallbackURL = () => {
-    if (process.env.VERCEL_URL) {
-      return `https://${process.env.VERCEL_URL}/api/auth/discord/callback`;
-    }
-    if (process.env.REPL_SLUG && process.env.REPL_OWNER) {
-      return `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/api/auth/discord/callback`;
-    }
-    return "https://projecthub-fie.vercel.app/api/auth/discord/callback";
-  };
+// Discord OAuth strategy - hardcoded credentials
+const DISCORD_CLIENT_ID = "1410900086463926308";
+const DISCORD_CLIENT_SECRET = "z7Hf45mm7_rzVrNpKUbnY9gaLZ714nle";
 
-  passport.use(new DiscordStrategy({
-    clientID: process.env.DISCORD_CLIENT_ID,
-    clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: getCallbackURL(),
-    scope: ['identify', 'email']
-  }, async (accessToken, refreshToken, profile, done) => {
-    try {
-      let user = await storage.getUserBySocialId('discord', profile.id);
+const getCallbackURL = () => {
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}/api/auth/discord/callback`;
+  }
+  if (process.env.REPL_SLUG && process.env.REPL_OWNER) {
+    return `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/api/auth/discord/callback`;
+  }
+  return "https://projecthub-fie.vercel.app/api/auth/discord/callback";
+};
 
-      if (!user) {
-        user = await storage.upsertUser({
-          id: profile.id,
-          discordId: profile.id,
-          email: profile.email || null,
-          firstName: profile.username || null,
-          lastName: null,
-          profileImageUrl: profile.avatar ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png` : null,
-        });
-      }
+passport.use(new DiscordStrategy({
+  clientID: DISCORD_CLIENT_ID,
+  clientSecret: DISCORD_CLIENT_SECRET,
+  callbackURL: getCallbackURL(),
+  scope: ['identify', 'email']
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    let user = await storage.getUserBySocialId('discord', profile.id);
 
-      return done(null, user);
-    } catch (error) {
-      return done(error);
+    if (!user) {
+      user = await storage.upsertUser({
+        id: profile.id,
+        discordId: profile.id,
+        email: profile.email || null,
+        firstName: profile.username || null,
+        lastName: null,
+        profileImageUrl: profile.avatar ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png` : null,
+      });
     }
-  }));
-}
+
+    return done(null, user);
+  } catch (error) {
+    return done(error);
+  }
+}));
 
 
 // Serialize user for session
