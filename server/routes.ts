@@ -130,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { default: nodemailer } = await import('nodemailer');
 
       // Create transporter using Gmail SMTP
-      const transporter = nodemailer.createTransporter({
+      const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
           user: 'dev.projecthub.fie@gmail.com',
