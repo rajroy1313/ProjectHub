@@ -99,34 +99,24 @@ export default function Navigation() {
                   <NavLink href="skills">Skills</NavLink>
                   <NavLink href="about">About</NavLink>
                   <NavLink href="contact">Contact</NavLink>
-                  <div className="px-3 py-2 space-y-2">
                   <Button
-                    variant="ghost"
-                    onClick={() => setTheme(theme === "dark" ? "light" : theme === "light" ? "system" : "dark")}
-                    className="bg-slate-700 hover:bg-slate-600 border-slate-600 justify-start w-full"
+                    variant="outline"
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    className="bg-slate-700 hover:bg-slate-600 border-slate-600 justify-start"
                     data-testid="mobile-theme-toggle"
                   >
                     {theme === "dark" ? (
                       <>
                         <Sun className="h-4 w-4 text-yellow-400 mr-2" />
-                        Switch to Light
-                      </>
-                    ) : theme === "light" ? (
-                      <>
-                        <Moon className="h-4 w-4 text-slate-400 mr-2" />
-                        Switch to System
+                        Light Mode
                       </>
                     ) : (
                       <>
                         <Moon className="h-4 w-4 text-blue-400 mr-2" />
-                        Switch to Dark
+                        Dark Mode
                       </>
                     )}
                   </Button>
-                  <div className="text-xs text-slate-400 px-2">
-                    Current: {theme === "system" ? "System" : theme === "dark" ? "Dark" : "Light"}
-                  </div>
-                </div>
                 </div>
               </SheetContent>
             </Sheet>
