@@ -42,7 +42,7 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             <NavLink href="home">Home</NavLink>
-            <NavLink href="projects">Projects</NavLink>
+            <NavLink href="/request-project">Projects</NavLink>
             <Button
               className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600 mr-3"
               onClick={() => window.location.href = "/request-project"}
