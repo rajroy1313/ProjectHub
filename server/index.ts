@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 // Test database connection
 async function testDatabaseConnection() {
   try {
-    await connection`SELECT 1`;
+    await connection.execute('SELECT 1');
     console.log("✅ Database connected successfully");
   } catch (error) {
     console.error("❌ Database connection failed:", (error as Error).message);
