@@ -57,6 +57,16 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
+  // Ensure initial theme is applied
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (!root.classList.contains("light") && !root.classList.contains("dark")) {
+      root.classList.add(theme === "system" ? 
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : 
+        theme);
+    }
+  }, []);
+
   const value = {
     theme,
     setTheme: (theme: Theme) => {
