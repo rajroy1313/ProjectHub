@@ -133,15 +133,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const transporter = nodemailer.createTransporter({
         service: 'gmail',
         auth: {
-          user: process.env.GMAIL_USER || 'yuborajroy00@gmail.com',
-          pass: process.env.GMAIL_APP_PASSWORD // App password, not regular password
+          user: 'dev.projecthub.fie@gmail.com',
+          pass: 'exkf ymlg buup cwrh' // App password, not regular password
         }
       });
 
       // Email content
       const mailOptions = {
-        from: `"Contact Form" <${process.env.GMAIL_USER || 'yuborajroy00@gmail.com'}>`,
-        to: 'yuborajroy00@gmail.com',
+        from: `"Contact Form" <dev.projecthub.fie@gmail.com>`,
+        to: 'dev.projecthub.fie@gmail.com',
         subject: `New Contact Form: ${subject}`,
         html: `
           <h2>New Contact Form Submission</h2>
