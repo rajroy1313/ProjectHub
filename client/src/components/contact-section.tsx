@@ -58,7 +58,7 @@ export default function ContactSection() {
     {
       icon: <Mail className="text-blue-400" />,
       label: "Email",
-      value: "alex@example.com",
+      value: "dev.projecthub.fie@gmail.com",
       color: "bg-blue-500/20"
     },
     {
