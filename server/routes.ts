@@ -127,7 +127,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { name, email, subject, message } = req.body;
 
       // Import nodemailer
-      const nodemailer = require('nodemailer');
+      const { default: nodemailer } = await import('nodemailer');
 
       // Create transporter using Gmail SMTP
       const transporter = nodemailer.createTransporter({
