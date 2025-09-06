@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useLocation } from "wouter";
@@ -25,11 +26,28 @@ const registerSchema = z.object({
   lastName: z.string().min(1, "Last name is required"),
 });
 
+const forgotPasswordSchema = z.object({
+  email: z.string().email("Invalid email address"),
+});
+
+const resetPasswordSchema = z.object({
+  token: z.string().min(1, "Reset token is required"),
+  newPassword: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string().min(6, "Password must be at least 6 characters"),
+}).refine(data => data.newPassword === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
+
 export default function LoginPage() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const { login, register, isLoggingIn, isRegistering, isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState("login");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [isSendingReset, setIsSendingReset] = useState(false);
+  const [isResettingPassword, setIsResettingPassword] = useState(false);
 
   const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -46,6 +64,22 @@ export default function LoginPage() {
       password: "",
       firstName: "",
       lastName: "",
+    },
+  });
+
+  const forgotPasswordForm = useForm<z.infer<typeof forgotPasswordSchema>>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const resetPasswordForm = useForm<z.infer<typeof resetPasswordSchema>>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: {
+      token: "",
+      newPassword: "",
+      confirmPassword: "",
     },
   });
 
@@ -87,6 +121,71 @@ export default function LoginPage() {
         description: error.message || "Please try again.",
         variant: "destructive",
       });
+    }
+  };
+
+  const onForgotPassword = async (values: z.infer<typeof forgotPasswordSchema>) => {
+    setIsSendingReset(true);
+    try {
+      const response = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Reset Email Sent!",
+          description: "Check your email for password reset instructions.",
+        });
+        setShowForgotPassword(false);
+        forgotPasswordForm.reset();
+      } else {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to send reset email");
+      }
+    } catch (error: any) {
+      toast({
+        title: "Reset Failed",
+        description: error.message || "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSendingReset(false);
+    }
+  };
+
+  const onResetPassword = async (values: z.infer<typeof resetPasswordSchema>) => {
+    setIsResettingPassword(true);
+    try {
+      const response = await fetch("/api/auth/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: values.token,
+          newPassword: values.newPassword,
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Password Reset Successfully!",
+          description: "You can now login with your new password.",
+        });
+        setShowResetPassword(false);
+        resetPasswordForm.reset();
+      } else {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to reset password");
+      }
+    } catch (error: any) {
+      toast({
+        title: "Reset Failed",
+        description: error.message || "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsResettingPassword(false);
     }
   };
 
@@ -153,6 +252,143 @@ export default function LoginPage() {
                   >
                     {isLoggingIn ? "Signing In..." : "Sign In"}
                   </Button>
+                  
+                  <div className="text-center">
+                    <Dialog open={showForgotPassword} onOpenChange={setShowForgotPassword}>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="link"
+                          className="text-sm text-slate-400 hover:text-white"
+                          data-testid="button-forgot-password"
+                        >
+                          Forgot your password?
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="bg-slate-800 border-slate-700">
+                        <DialogHeader>
+                          <DialogTitle className="text-white">Reset Your Password</DialogTitle>
+                        </DialogHeader>
+                        <Form {...forgotPasswordForm}>
+                          <form onSubmit={forgotPasswordForm.handleSubmit(onForgotPassword)} className="space-y-4">
+                            <FormField
+                              control={forgotPasswordForm.control}
+                              name="email"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-slate-300">Email Address</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      {...field}
+                                      type="email"
+                                      className="bg-slate-700 border-slate-600 text-white"
+                                      placeholder="Enter your email address"
+                                      data-testid="input-forgot-email"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <Button
+                              type="submit"
+                              className="w-full bg-blue-600 hover:bg-blue-700"
+                              disabled={isSendingReset}
+                              data-testid="button-send-reset"
+                            >
+                              {isSendingReset ? "Sending..." : "Send Reset Email"}
+                            </Button>
+                          </form>
+                        </Form>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+
+                  <div className="text-center">
+                    <Dialog open={showResetPassword} onOpenChange={setShowResetPassword}>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="link"
+                          className="text-sm text-slate-400 hover:text-white"
+                          data-testid="button-have-reset-token"
+                        >
+                          Have a reset token?
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="bg-slate-800 border-slate-700">
+                        <DialogHeader>
+                          <DialogTitle className="text-white">Enter New Password</DialogTitle>
+                        </DialogHeader>
+                        <Form {...resetPasswordForm}>
+                          <form onSubmit={resetPasswordForm.handleSubmit(onResetPassword)} className="space-y-4">
+                            <FormField
+                              control={resetPasswordForm.control}
+                              name="token"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-slate-300">Reset Token</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      {...field}
+                                      className="bg-slate-700 border-slate-600 text-white"
+                                      placeholder="Enter the token from your email"
+                                      data-testid="input-reset-token"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={resetPasswordForm.control}
+                              name="newPassword"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-slate-300">New Password</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      {...field}
+                                      type="password"
+                                      className="bg-slate-700 border-slate-600 text-white"
+                                      placeholder="Enter your new password"
+                                      data-testid="input-new-password"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={resetPasswordForm.control}
+                              name="confirmPassword"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-slate-300">Confirm Password</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      {...field}
+                                      type="password"
+                                      className="bg-slate-700 border-slate-600 text-white"
+                                      placeholder="Confirm your new password"
+                                      data-testid="input-confirm-password"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <Button
+                              type="submit"
+                              className="w-full bg-emerald-600 hover:bg-emerald-700"
+                              disabled={isResettingPassword}
+                              data-testid="button-reset-password"
+                            >
+                              {isResettingPassword ? "Resetting..." : "Reset Password"}
+                            </Button>
+                          </form>
+                        </Form>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </form>
               </Form>
             </TabsContent>

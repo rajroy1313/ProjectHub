@@ -100,6 +100,100 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // Forgot password endpoint
+  app.post('/api/auth/forgot-password', async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      if (!email) {
+        return res.status(400).json({ message: "Email is required" });
+      }
+
+      // Check if user exists
+      const user = await storage.getUserByEmail(email);
+      if (!user) {
+        // Don't reveal if email exists or not for security
+        return res.json({ message: "If an account with that email exists, you will receive a reset email" });
+      }
+
+      // Generate reset token
+      const { randomBytes } = await import("crypto");
+      const resetToken = randomBytes(32).toString('hex');
+      const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour from now
+
+      // Save reset token to user
+      await storage.updateUserResetToken(user.id, resetToken, resetTokenExpiry);
+
+      // Send reset email
+      const { default: nodemailer } = await import('nodemailer');
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'dev.projecthub.fie@gmail.com',
+          pass: 'exkf ymlg buup cwrh'
+        }
+      });
+
+      const resetUrl = `${req.protocol}://${req.get('host')}/reset-password?token=${resetToken}`;
+      
+      const mailOptions = {
+        from: `"ProjectHub" <dev.projecthub.fie@gmail.com>`,
+        to: email,
+        subject: 'Password Reset Request',
+        html: `
+          <h2>Password Reset Request</h2>
+          <p>Hello ${user.firstName},</p>
+          <p>You requested to reset your password. Use the token below to reset your password:</p>
+          <p><strong>Reset Token:</strong> <code>${resetToken}</code></p>
+          <p>This token will expire in 1 hour.</p>
+          <p>If you didn't request this, please ignore this email.</p>
+          <hr>
+          <p><em>ProjectHub Security Team</em></p>
+        `,
+        replyTo: 'dev.projecthub.fie@gmail.com'
+      };
+
+      await transporter.sendMail(mailOptions);
+
+      res.json({ message: "If an account with that email exists, you will receive a reset email" });
+    } catch (error) {
+      console.error('Forgot password error:', error);
+      res.status(500).json({ message: "Failed to process password reset request" });
+    }
+  });
+
+  // Reset password endpoint
+  app.post('/api/auth/reset-password', async (req, res) => {
+    try {
+      const { token, newPassword } = req.body;
+
+      if (!token || !newPassword) {
+        return res.status(400).json({ message: "Token and new password are required" });
+      }
+
+      if (newPassword.length < 6) {
+        return res.status(400).json({ message: "Password must be at least 6 characters" });
+      }
+
+      // Find user by reset token
+      const user = await storage.getUserByResetToken(token);
+      if (!user || !user.resetTokenExpiry || new Date() > user.resetTokenExpiry) {
+        return res.status(400).json({ message: "Invalid or expired reset token" });
+      }
+
+      // Hash new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update user password and clear reset token
+      await storage.resetUserPassword(user.id, hashedPassword);
+
+      res.json({ message: "Password reset successfully" });
+    } catch (error) {
+      console.error('Reset password error:', error);
+      res.status(500).json({ message: "Failed to reset password" });
+    }
+  });
+
   // Discord OAuth routes - enabled when Discord credentials are available
   if (process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) {
     app.get('/api/auth/discord', passport.authenticate('discord'));

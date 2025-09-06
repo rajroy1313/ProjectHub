@@ -31,6 +31,9 @@ export const users = mysqlTable("users", {
   // Traditional email/password (optional)
   username: text("username").unique(),
   password: text("password"),
+  // Password reset
+  resetToken: varchar("reset_token", { length: 255 }).unique(),
+  resetTokenExpiry: timestamp("reset_token_expiry"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
