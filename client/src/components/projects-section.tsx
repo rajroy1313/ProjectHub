@@ -26,7 +26,6 @@ const projects: Project[] = [
     category: "bots",
     tech: ["discord.js", "C"," mySQL"],
     liveUrl: "https://discord.com/oauth2/authorize?client_id=1356575287151951943&permissions=8&integration_type=0&scope=bot%20applications.commands",
-
     status: " Active",
     statusColor: "bg-green-500"
   },
@@ -38,9 +37,8 @@ const projects: Project[] = [
     category: "websites",
     tech: ["Typescript React", "Node.js", "PostgreSQL"],
     liveUrl: "https://primebot-online.vercel.app",
-    githubUrl: "https://github.com/yourusername/ecommerce",
     status: "Development",
-    statusColor: "bg-green-500"
+    statusColor: "bg-yellow-500"
   },
   {
     id: "Sky",
@@ -48,10 +46,10 @@ const projects: Project[] = [
     description: "Collaborative task management application with real-time updates, team collaboration features, and project tracking capabilities.",
     image: "/api/placeholder/400/300",
     category: "bots",
-    tech: ["React", "Socket.io", "MongoDB", "Express", "JWT"],
+    tech: ["Discord.js"],
     liveUrl: "https://yourtasks.com",
     githubUrl: "https://github.com/yourusername/taskmanager",
-    status: "Live",
+    status: "Active",
     statusColor: "bg-green-500"
   },
   {
