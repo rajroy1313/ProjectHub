@@ -48,3 +48,19 @@ const mysqlConfig = parseMySQLConfig();
 export const connection = mysql.createPool(mysqlConfig);
 
 export const db = drizzle(connection, { schema, mode: 'default' });
+
+// Test database for Vercel
+export function getTestDb() {
+  const testConfig = {
+    host: process.env.TEST_MYSQL_HOST || process.env.MYSQL_HOST || 'localhost',
+    port: parseInt(process.env.TEST_MYSQL_PORT || process.env.MYSQL_PORT || '3306'),
+    user: process.env.TEST_MYSQL_USER || process.env.MYSQL_USER || 'root',
+    password: process.env.TEST_MYSQL_PASSWORD || process.env.MYSQL_PASSWORD || '',
+    database: process.env.TEST_MYSQL_DATABASE || 'projecthub_test',
+    multipleStatements: true,
+    connectTimeout: 60000,
+  };
+
+  const testConnection = mysql.createPool(testConfig);
+  return drizzle(testConnection, { schema, mode: 'default' });
+}
