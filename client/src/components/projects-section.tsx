@@ -37,8 +37,8 @@ const projects: Project[] = [
     category: "websites",
     tech: ["Typescript React", "Node.js", "PostgreSQL"],
     liveUrl: "https://primebot-online.vercel.app",
-    status: "Development",
-    statusColor: "bg-yellow-500"
+    status: "In development",
+    statusColor: "bg-red-500"
   },
   {
     id: "Sky",
@@ -47,46 +47,34 @@ const projects: Project[] = [
     image: "/api/placeholder/400/300",
     category: "bots",
     tech: ["Discord.js"],
-    liveUrl: "https://yourtasks.com",
-    githubUrl: "https://github.com/yourusername/taskmanager",
+    liveUrl: null,
+    githubUrl: null,
     status: "Active",
     statusColor: "bg-green-500"
   },
   {
-    id: "weather-dashboard",
-    title: "Weather Dashboard",
-    description: "Interactive weather dashboard with location-based forecasts, historical data visualization, and severe weather alerts.",
+    id: "db",
+    title: "Database Dashboard",
+    description: "Online based database dashboard for your PostgreeSQL.",
     image: "/api/placeholder/400/300",
     category: "websites",
-    tech: ["React", "Chart.js", "OpenWeather API", "Geolocation"],
-    liveUrl: "https://yourweather.com",
-    githubUrl: "https://github.com/yourusername/weather-dashboard",
-    status: "Live",
-    statusColor: "bg-green-500"
+    tech: ["Typescript","React"],
+    liveUrl: null,
+    githubUrl: "https://github.com/rajroy1313/Database-web.git",
+    status: "Developing",
+    statusColor: "bg-red-500"
   },
   {
-    id: "blog-platform",
-    title: "Blog Platform",
-    description: "Content management system with markdown support, SEO optimization, comment system, and analytics dashboard for bloggers.",
+    id: "wh",
+    title: "Hosting ",
+    description: "Discord bot hosting",
     image: "/api/placeholder/400/300",
     category: "websites",
-    tech: ["React", "Next.js", "Prisma", "PostgreSQL", "MDX"],
-    liveUrl: "https://yourblog.com",
-    githubUrl: "https://github.com/yourusername/blog-platform",
-    status: "Development",
-    statusColor: "bg-yellow-500"
-  },
-  {
-    id: "fitness-tracker",
-    title: "Fitness Tracking Website",
-    description: "Personal fitness tracking application with workout logging, progress visualization, and social features for motivation.",
-    image: "/api/placeholder/400/300",
-    category: "websites",
-    tech: ["React", "D3.js", "Firebase", "PWA", "Service Workers"],
-    liveUrl: "https://yourfitness.com",
-    githubUrl: "https://github.com/yourusername/fitness-tracker",
-    status: "Beta",
-    statusColor: "bg-blue-500"
+    tech: ["React", "Typescript", "PostgreSQL"],
+    liveUrl: null,
+    githubUrl: "https://github.com/rajroy1313/Webhost.git",
+    status: "In development",
+    statusColor: "bg-red-500"
   }
 ];
 
